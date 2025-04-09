@@ -1,232 +1,223 @@
-
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
 }
 
 .text-container {
-  z-index: 100;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  justify-content: center;
-  align-items: center;
-  font-size: 96px;
-  color: white;
-  opacity: 0.8;
-  user-select: none;
-  text-shadow: 1px 1px rgba(0,0,0,0.1);
+	z-index: 100;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+	font-size: 96px;
+	color: white;
+	opacity: 0.8;
+	user-select: none;
+	text-shadow: 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 :root {
-  --color-bg1: rgb(54, 0, 81);
-  --color-bg2: rgb(0, 17, 82);
-  --color1: 50, 0, 50;
-  --color2: 221, 74, 255;
-  --color3: 100, 20, 255;
-  --color4: 200, 50, 50;
-  --color5: 10, 20, 10;
-  --color-interactive: 140, 100, 255;
-  --circle-size: 10%;
-  --blending: overlay;
+	--color-interactive: 200, 200, 220;
+	--circle-size: 100%;
+	--blending: darken;
 }
-
-@keyframes moveInCircle {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes moveVertical {
-  0% {
-    transform: translateY(-50%);
-  }
-  50% {
-    transform: translateY(50%);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes moveHorizontal {
-  0% {
-    transform: translateX(-50%) translateY(-10%);
-  }
-  50% {
-    transform: translateX(50%) translateY(10%);
-  }
-  100% {
-    transform: translateX(-50%) translateY(-10%);
-  }
-}
-
 
 .gradient-bg {
-  width: 100vw;
-  height: 100%;
-  position: fixed;
-  overflow: hidden;
-  background: black;
-  top: 0;
-  left: 0;
+	width: 100vw;
+	height: 100%;
+	position: fixed;
+	overflow: hidden;
+	background: black;
+	top: 0;
+	left: 0;
+	z-index: -1;
 
-  svg {
-    display: none;
-  }
+	svg {
+		display: none;
+	}
 
 
-  .gradients-container {
-    filter: url(#goo) blur(60px) ;
-    width: 500%;
-    height: 500%;
-    opacity: 20%;
-  }
+	.gradients-container {
+		filter: url(#goo) blur(80px);
+		width: 100%;
+		height: 100%;
+		opacity: 50%;
+	}
 
-  .g1 {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
-    mix-blend-mode: var(--blending);
+	#interactive {
+		position: absolute;
+		background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
+		mix-blend-mode: var(--blending);
 
-    width: var(--circle-size);
-    height: var(--circle-size);
-    top: calc(50% - var(--circle-size) / 2);
-    left: calc(50% - var(--circle-size) / 2);
+		width: 100%;
+		height: 100%;
+		top: -50%;
+		left: -50%;
 
-    transform-origin: center center;
-    animation: moveVertical 90s ease infinite;
-
-    opacity: 1;
-  }
-
-  .g2 {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
-    mix-blend-mode: var(--blending);
-
-    width: var(--circle-size);
-    height: var(--circle-size);
-    top: calc(50% - var(--circle-size) / 2);
-    left: calc(50% - var(--circle-size) / 2);
-
-    transform-origin: calc(50% - 400px);
-    animation: moveInCircle 60s reverse infinite;
-
-    opacity: 1;
-  }
-
-  .g3 {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
-    mix-blend-mode: var(--blending);
-
-    width: var(--circle-size);
-    height: var(--circle-size);
-    top: calc(50% - var(--circle-size) / 2 + 200px);
-    left: calc(50% - var(--circle-size) / 2 - 500px);
-
-    transform-origin: calc(50% + 400px);
-    animation: moveInCircle 120s linear infinite;
-
-    opacity: 1;
-  }
-
-  .g4 {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
-    mix-blend-mode: var(--blending);
-
-    width: var(--circle-size);
-    height: var(--circle-size);
-    top: calc(50% - var(--circle-size) / 2);
-    left: calc(50% - var(--circle-size) / 2);
-
-    transform-origin: calc(50% - 200px);
-    animation: moveHorizontal 120s ease infinite;
-
-    opacity: 0.7;
-  }
-
-  .g5 {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
-    mix-blend-mode: var(--blending);
-
-    width: calc(var(--circle-size) * 2);
-    height: calc(var(--circle-size) * 2);
-    top: calc(50% - var(--circle-size));
-    left: calc(50% - var(--circle-size));
-
-    transform-origin: calc(50% - 800px) calc(50% + 200px);
-    animation: moveInCircle 60s ease infinite;
-
-    opacity: 1;
-  }
-
-  #interactive {
-    position: absolute;
-    background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
-    mix-blend-mode: var(--blending);
-
-    width: 100%;
-    height: 100%;
-    top: -50%;
-    left: -50%;
-
-    opacity: 0.7;
-    /* opacity: 1; */
-    /* background-color: white; */
-  }
+		opacity: 0;
+	}
 }
 
-#name{
-    position: absolute;
-    left: 8%;
-    top: 5%;
-    font-size: 8rem;
-    max-width: 50%;
-    /* color: rgb(218, 218, 218); */
-    color: black;
-    text-shadow: 0px 0px 4px rgb(168, 168, 168);
+#name {
+	position: absolute;
+	left: 8%;
+	top: 5%;
+	font-size: 8rem;
+	max-width: 50%;
+	/* color: rgb(218, 218, 218); */
 }
 
-.scrollArrow{
-    border: solid dimgray;
-    border-width: 0 1px 1px 0;
-    display: inline-block;
-    padding: 5px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    position: absolute;
-    left: 50%;
-    bottom: 5%;
-    animation: arrowBob 1.5s infinite;
+.scrollArrow {
+	border: solid dimgray;
+	border-width: 0 1px 1px 0;
+	display: inline-block;
+	padding: 5px;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	position: absolute;
+	left: 50%;
+	bottom: 5%;
+	animation: arrowBob 1.5s infinite;
 }
 
-#landingScreen{
-    width: 100%;
-    height: 100vh;
-    left: 0;
-    top:0;
+#landingScreen {
+	width: 100%;
+	height: 100vh;
+	left: 0;
+	top: 0;
+}
+
+#testing{
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+p, h4, h3, h2, h1{
+	color: black;
+	text-shadow: 0px 0px 1px rgb(168, 168, 168);
+	animation: powerloss 10s;
+}
+
+p::selection, h4::selection, h3::selection, h2::selection, h1::selection{
+	color: rgb(168, 168, 168);
+	animation: powerloss 10s;
+}
+
+p{
+	font-size: 2.5rem;
+	text-shadow: 0px 0px 1px rgb(168, 168, 168);
+}
+
+.fadeIn{
+	animation: fadeIn 5s;
 }
 
 @keyframes arrowBob {
-    0%{
-        transform: rotate(45deg) translateX(0) translateY(0);
-        transition: ease 0.5s;
-    }
-    50%{
-        transform: rotate(45deg) translateX(50%) translateY(50%);
-        transition: ease 0.5s;
-    }
+	0% {
+		transform: rotate(45deg) translateX(0) translateY(0);
+		transition: ease 0.5s;
+	}
+
+	50% {
+		transform: rotate(45deg) translateX(50%) translateY(50%);
+		transition: ease 0.5s;
+	}
+}
+
+@keyframes powerloss {
+	0%{
+		color: rgb(168, 168, 168);
+		text-shadow: transparent;
+	}
+
+	29%{
+		color: rgb(168, 168, 168);
+		text-shadow: transparent;
+	}
+
+	30%{
+		color: black;
+		text-shadow: 0px 0px 1px rgb(168, 168, 168);
+	}
+
+	32%{
+		color: rgb(168, 168, 168);
+		text-shadow: transparent;
+	}
+
+	34%{
+		color: black;
+		text-shadow: 0px 0px 1px rgb(168, 168, 168);
+	}
+
+	40%{
+		color: black;
+		text-shadow: 0px 0px 1px rgb(168, 168, 168);
+	}
+
+	42%{
+		color: rgb(168, 168, 168);
+		text-shadow: transparent;
+	}
+
+	54%{
+		color: rgb(168, 168, 168);
+		text-shadow: transparent;
+	}
+
+	56%{
+		color: black;
+		text-shadow: 0px 0px 1px rgb(168, 168, 168);
+	}
+
+	64%{
+		color: black;
+		text-shadow: 0px 0px 1px rgb(168, 168, 168);
+	}
+
+	64%{
+		color: black;
+		text-shadow: 0px 0px 1px rgb(168, 168, 168);
+	}
+
+	66%{
+		color: rgb(168, 168, 168);
+		text-shadow: transparent;
+	}
+
+	68%{
+		color: rgb(168, 168, 168);
+		text-shadow: transparent;
+	}
+
+	70%{
+		color: black;
+		text-shadow: 0px 0px 1px rgb(84, 84, 84);
+	}
+
+	75%{
+		color: rgb(168, 168, 168);
+		text-shadow: transparent;
+	}
+
+	100%{
+		color: black;
+		text-shadow: 0px 0px 1px rgb(168, 168, 168);
+	}
+}
+
+@keyframes fadeIn{
+	0%{
+		opacity: 0%;
+	}
+	100%{
+		opacity: 100%;
+	}
 }

@@ -1,4 +1,4 @@
-// FOR THE TRAILING MOUSE EFFECT
+let flashlight = document.getElementById('interactive');
 
 document.addEventListener('DOMContentLoaded', () => {
     const interBubble = document.getElementById('interactive');
@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let tgY = 0;
 
     function move() {
-        curX += (tgX - curX) / 120;
-        curY += (tgY - curY) / 120;
+        curX += (tgX - curX) / 20;
+        curY += (tgY - curY) / 20;
         interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
         requestAnimationFrame(() => {
             move();
@@ -23,3 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     move();
 });
+
+setTimeout(() => {
+    flashlight.className = 'fadeIn';
+}, 10000);
+
+setTimeout(() => {
+    flashlight.style.opacity = 0.7;
+}, 14900);
