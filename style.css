@@ -64,6 +64,22 @@ body {
 	}
 }
 
+.overlay {
+	opacity: 0;
+	top: 0;
+    left: 0;
+    position: fixed;
+    width: 5000px;
+    height: 5000px;
+    background: -moz-radial-gradient(rgba(0,0,0,0.1) 150px, rgba(0, 0, 0, 0.94) 250px);
+    background: -webkit-radial-gradient(rgba(0,0,0,0.1) 150px, rgba(0, 0, 0, 0.94) 250px);
+    background: -ms-radial-gradient(rgba(0,0,0,0.1) 150px, rgba(0, 0, 0, 0.94) 250px);
+    background: -o-radial-gradient(rgba(0,0,0,0.1) 150px, rgba(0, 0, 0, 0.94) 250px);
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+}
+
 #name {
 	position: absolute;
 	left: 8%;
@@ -108,15 +124,6 @@ p, h4, h3, h2, h1{
 p::selection, h4::selection, h3::selection, h2::selection, h1::selection{
 	color: rgb(168, 168, 168);
 	animation: powerloss 10s;
-}
-
-.circle-cutout {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	clip-path: polygon(50% 0%, 100% 100%, 0% 100%); /* Creates a half-circle cutout */
 }
 
 p{
