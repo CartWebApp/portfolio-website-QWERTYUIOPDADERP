@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 setTimeout(() => {
     flashlight.className = 'fadeIn';
+    cursor.className = 'overlay fadeIn';
 }, 10000);
 
 setTimeout(() => {
