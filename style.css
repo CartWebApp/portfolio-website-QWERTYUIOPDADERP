@@ -61,6 +61,7 @@ body {
 		left: -50%;
 
 		opacity: 0;
+		transition: opacity 300ms;
 	}
 }
 
@@ -78,6 +79,7 @@ body {
     pointer-events: none;
     z-index: 10000;
     transform: translate(-50%, -50%);
+	transition: opacity 300ms, background 300ms;
 }
 
 #name {
@@ -126,6 +128,10 @@ p::selection, h4::selection, h3::selection, h2::selection, h1::selection{
 	animation: powerloss 10s;
 }
 
+p.on::selection, h4.on::selection, h3.on::selection, h2.on::selection, h1.on::selection, a::selection{
+	color: burlywood;
+}
+
 p{
 	font-size: 2.5rem;
 	text-shadow: 0px 0px 1px rgb(168, 168, 168);
@@ -150,6 +156,23 @@ p.flicker{
 #content iframe{
 	height: 100vh;
 	width: 80%;
+}
+
+p.on, h1.on, scrollArrow.on, a.on{
+	animation: none;
+	color: rgb(218, 218, 218);
+}
+
+.overlay.on, #cursor.on{
+	opacity: 0% !important;
+}
+
+#interactive.on{
+	background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.3) 0, rgba(var(--color-interactive), 0.3) 100%) no-repeat;
+	width: 200%;
+	height: 200%;
+	left: -100%;
+    top: -100%;
 }
 
 @keyframes flicker {
@@ -345,4 +368,81 @@ p.flicker{
 	100%{
 		opacity: 100%;
 	}
+}
+
+
+#pullchain {
+	display: block;
+	width: 10px;
+	height: 150px;
+	position: fixed;
+	z-index: 4;
+	right: 15%;
+	top: -500px;
+	overflow: visible;
+	cursor: pointer;
+	transition: top 300ms, transform 300ms;
+	z-index: 10001;
+	&:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        width: 0;
+        height: 100%;
+        border-left: 5px dotted #F3A808;
+        transform: translate(-50%, 0);
+    }
+	&:after {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        background: #F3A808;
+        bottom: 0px;
+        left: 0;
+        transform: translate(-25%, 25%);
+        border-radius: 100%;
+    }
+	&:active {
+		transform: translate(0, 45px);
+	}
+}
+
+#pullchain.letThereBeChain{
+	top: -45px;
+}
+
+@keyframes pullChain{
+	0%{
+		top: -100%;
+	}
+	50%{
+		top: -50%;
+	}
+	100%{
+		top: 10%;
+	}
+}
+
+header{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: fit-content;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+	align-content: center;
+	font-size: 2rem;
+	background-color: black;
+	z-index: 9999;
+	padding: 0.5%;
+}
+
+header > a{
+	color: rgb(218, 218, 218);
+	margin-left: 20px;
 }
