@@ -53,7 +53,7 @@ body {
 
 	#interactive {
 		position: absolute;
-		background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
+		radial-gradient(circle at center, rgba(var(--color-interactive), 1) 0, rgba(var(--color-interactive), 0.1) 65%) no-repeat;
 		mix-blend-mode: var(--blending);
 
 		width: 100%;
