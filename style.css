@@ -524,12 +524,34 @@ header > a{
 	color: white;
 }
 
+.twoColumn{
+	min-width: 200px;
+	width: 40%;
+}
+
+.threeColumn{
+	min-width: 150px;
+	width: 20%;
+}
+
+.fourColumn{
+	min-width: 100px;
+	width: 20%;
+}
+
+.resumeColumn p:first-child{
+	font-weight: bold;
+}
+
 .resumeColumn{
+	padding: 0 2%;
+    flex-grow: 1;
 	display: flex;
 	flex-flow: column nowrap;
 }
 
 .resumeColumn h3{
+	font-size: 1.3rem;
 	color: black;
 	text-shadow: none;
 	animation: none;
@@ -537,7 +559,7 @@ header > a{
 
 .resumeColumn p{
 	color: black;
-	font-size: 1rem;
+	font-size: 0.8rem;
 	text-shadow: none;
 	animation: none;
 	margin: 5px 0;
@@ -545,5 +567,62 @@ header > a{
 
 hr{
 	border: black solid 1px;
-    width: 90%;
+    width: 95%;
+}
+
+#content a{
+	font-size: 2rem;
+}
+
+@media screen and (max-width: 1750px) {
+	#name{
+		font-size: 6rem;
+	}
+}
+
+@media screen and (max-width: 1500px) {
+	header {
+	  font-size: 2rem;
+	}
+}
+
+@media screen and (max-width: 1250px) {
+	header {
+	  font-size: 1.8rem;
+	}
+	#name{
+		font-size: 4.5rem;
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	#name{
+		top: 2%;
+		left: 5%;
+		font-size: 3rem;
+	}
+	header{
+		font-size: 1.5rem;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	header{
+		font-size: 1.3rem;
+	}
+	#email{
+		font-size: large;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	#vanish {
+	  display: none;
+	}
+	#name{
+		font-size: 2rem;
+	}
+	p{
+		font-size: 1.5rem;
+	}
 }
