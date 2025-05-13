@@ -10,6 +10,7 @@ let on = false;
 const interBubble = document.getElementById('interactive');
 const cursor = document.getElementById("cursor");
 
+// The darkness fade in at the start
 let timeoutID = setTimeout(() => {
     flashlight.className = 'fadeIn';
     cursor.className = 'overlay fadeIn';
@@ -17,6 +18,7 @@ let timeoutID = setTimeout(() => {
 
 let timeoutID2;
 
+// The text border color flicker
 function makeThemFlicker(delay){
     timeoutID2 = setTimeout(() => {
         flashlight.style.opacity = 1;
@@ -40,6 +42,7 @@ function makeThemFlicker(delay){
     }, delay);
 }
 
+// On page load
 document.addEventListener('DOMContentLoaded', () => {
     let curX = 0;
     let curY = 0;
@@ -48,10 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     makeThemFlicker(13000);
 
+    // Moves the flashlight if the lights aren't on
     function move() {
         curX += (tgX - curX) / 2;
         curY += (tgY - curY) / 2;
         if(!on){
+            // Flashlight is composed of two pieces - the black overlay and the bright underlay.
             interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
             cursor.style.left = `${Math.round(curX)}px`;
             cursor.style.top = `${Math.round(curY)}px`;
@@ -61,16 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // On mouse move change the target position for the flashlight.
     window.addEventListener('mousemove', (event) => {
         tgX = event.clientX;
         tgY = event.clientY;
     });
 
+    // Check if light/dark mode saved and if so load it
     loadLightMode();
 
     move();
 });
 
+//Toggles the light / flashlight
 function toggleLight(i=true){
     if(i) {
         on = !on;
@@ -92,9 +100,11 @@ function toggleLight(i=true){
     if(mainScrollArrow){
         mainScrollArrow.classList.toggle('on');
     }
+    // Saves light / flashlight mode to session storage
     saveLightMode();
 }
 
+// I chose to use session instead of local storage so users would experience the power loss animation each time they revisted
 function saveLightMode(){
     sessionStorage.setItem(
         `lightMode`,
@@ -102,6 +112,7 @@ function saveLightMode(){
     );
 }
 
+// Checks if light/dark mode is saved and if so loads it, canceling the slow fade-in as well
 function loadLightMode(){
     if(JSON.parse(sessionStorage.getItem('lightMode'))==null){
 
@@ -118,42 +129,31 @@ function loadLightMode(){
     }
 }
 
+// The carousel stuff
 
-
-
-/*--------------------
-Vars
---------------------*/
-const $menu = document.querySelector('.menu');
-const $items = document.querySelectorAll('.menu--item');
-const $images = document.querySelectorAll('.menu--item img');
-let menuWidth = $menu.clientWidth;
-let itemWidth = $items[0].clientWidth;
-let wrapWidth = $items.length * itemWidth;
+const menu = document.querySelector('.menu');
+const menuItems = document.querySelectorAll('.menu--item');
+const menuImages = document.querySelectorAll('.menu--item img');
+let menuWidth = menu.clientWidth;
+let itemWidth = menuItems[0].clientWidth;
+let wrapWidth = menuItems.length * itemWidth;
 
 let scrollSpeed = 0;
 let oldScrollY = 0;
 let scrollY = 0;
 let y = 0;
 
-/*--------------------
-Lerp
---------------------*/
+// Some mathy interpolation stuff I took off the internet
 const lerp = (v0, v1, t) => v0 * (1 - t) + v1 * t;
 
-/*--------------------
-Wrap helper
---------------------*/
 const wrap = (min, max, value) => {
   const range = max - min;
   return ((((value - min) % range) + range) % range) + min;
 };
 
-/*--------------------
-Dispose
---------------------*/
+// Set up the x scroll for each image
 const dispose = (scroll) => {
-  $items.forEach((item, i) => {
+  menuItems.forEach((item, i) => {
     const x = i * itemWidth + scroll;
     const wrappedX = wrap(-itemWidth, wrapWidth - itemWidth, x);
     item.style.transform = `translateX(${wrappedX}px)`;
@@ -161,16 +161,12 @@ const dispose = (scroll) => {
 };
 dispose(0);
 
-/*--------------------
-Wheel
---------------------*/
+// Accepts the mouse wheel inputs to create scrolling
 const handleMouseWheel = (e) => {
   scrollY -= e.deltaY * 0.9;
 };
 
-/*--------------------
-Touch
---------------------*/
+// Accepts mouse grab inputs to create scrolling
 let touchStart = 0;
 let touchX = 0;
 let isDragging = false;
@@ -178,7 +174,7 @@ let isDragging = false;
 const handleTouchStart = (e) => {
   touchStart = e.clientX || e.touches[0].clientX;
   isDragging = true;
-  $menu.classList.add('is-dragging');
+  menu.classList.add('is-dragging');
 };
 
 const handleTouchMove = (e) => {
@@ -190,37 +186,31 @@ const handleTouchMove = (e) => {
 
 const handleTouchEnd = () => {
   isDragging = false;
-  $menu.classList.remove('is-dragging');
+  menu.classList.remove('is-dragging');
 };
 
-/*--------------------
-Listeners
---------------------*/
-$menu.addEventListener('wheel', handleMouseWheel);
 
-$menu.addEventListener('touchstart', handleTouchStart);
-$menu.addEventListener('touchmove', handleTouchMove);
-$menu.addEventListener('touchend', handleTouchEnd);
+menu.addEventListener('wheel', handleMouseWheel);
 
-$menu.addEventListener('mousedown', handleTouchStart);
-$menu.addEventListener('mousemove', handleTouchMove);
-$menu.addEventListener('mouseleave', handleTouchEnd);
-$menu.addEventListener('mouseup', handleTouchEnd);
+menu.addEventListener('touchstart', handleTouchStart);
+menu.addEventListener('touchmove', handleTouchMove);
+menu.addEventListener('touchend', handleTouchEnd);
 
-$menu.addEventListener('selectstart', (e) => e.preventDefault());
+menu.addEventListener('mousedown', handleTouchStart);
+menu.addEventListener('mousemove', handleTouchMove);
+menu.addEventListener('mouseleave', handleTouchEnd);
+menu.addEventListener('mouseup', handleTouchEnd);
 
-/*--------------------
-Resize
---------------------*/
+menu.addEventListener('selectstart', (e) => e.preventDefault());
+
+// Some dynamic resizing so the images don't clip
 window.addEventListener('resize', () => {
-  menuWidth = $menu.clientWidth;
-  itemWidth = $items[0].clientWidth;
-  wrapWidth = $items.length * itemWidth;
+  menuWidth = menu.clientWidth;
+  itemWidth = menuItems[0].clientWidth;
+  wrapWidth = menuItems.length * itemWidth;
 });
 
-/*--------------------
-Render
---------------------*/
+// Loads the motion and image positions
 const render = () => {
   requestAnimationFrame(render);
   y = lerp(y, scrollY, 0.1);
@@ -233,7 +223,7 @@ const render = () => {
   const rotate = scrollSpeed * 0.01;
   const scale = 1 - Math.min(100, Math.abs(scrollSpeed)) * 0.003;
 
-  $items.forEach((item) => {
+  menuItems.forEach((item) => {
     item.style.transform += ` skewX(${skewX}deg) rotate(${rotate}deg) scale(${scale})`;
   });
 };
