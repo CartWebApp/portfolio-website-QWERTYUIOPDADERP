@@ -122,6 +122,7 @@ p, h4, h3, h2, h1, a{
 	color: black;
 	text-shadow: 0px 0px 1px rgb(168, 168, 168);
 	animation: powerloss 10s;
+	transition: filter 200ms;
 }
 
 p::selection, h4::selection, h3::selection, h2::selection, h1::selection, a::selection{
@@ -555,6 +556,10 @@ header > a{
 	color: black;
 	text-shadow: none;
 	animation: none;
+}
+
+a:hover{
+	filter: brightness(0.7);
 }
 
 .resumeColumn p{
